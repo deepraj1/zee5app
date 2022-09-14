@@ -5,7 +5,13 @@ spring:
     url: jdbc:mysql://localhost:3306/zee5app_prod
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: com.zee.zee5app.utils.CustomTableNameStrategy
     show-sql: true
+server:
+  port: 9005
+zee5app:
+  app:
+    jwtSecret: secretKey
+    jwtExpirationMs: 36000000

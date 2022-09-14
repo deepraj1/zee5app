@@ -11,15 +11,17 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 //import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
+import com.zee.zee5app.dto.Movie;
 import com.zee.zee5app.dto.User;
+import com.zee.zee5app.dto.WebSeries;
 import com.zee.zee5app.exceptions.UNableToGenerateIdException;
 
-public class UserIdGenerator implements IdentifierGenerator {
+public class UserIdGenerator<T> implements IdentifierGenerator {
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 		// TODO Auto-generated method stub
 //		return super.generate(session, object);
-		User user = (User)object;
+		T t =  (T)object;
 		Connection connection = null;
 		connection = session.connection();
 		PreparedStatement preparedStatement = null;
@@ -44,7 +46,18 @@ public class UserIdGenerator implements IdentifierGenerator {
 			for(int i=0;i<10-no_digit;i++) {
 				no_zeros=no_zeros+0;
 			}
-			newId = user.getFirstName().charAt(0)+""+user.getLastName().charAt(0)+""+no_zeros+id;
+			
+			
+			if (t instanceof User) {
+				newId = ((User) t).getFirstName().charAt(0)+""+((User) t).getLastName().charAt(0)+""+no_zeros+id;
+			}else if(t instanceof Movie) {
+				newId = "M-> "+((Movie) t).getMovieName().charAt(0)+""+((Movie) t).getMovieName().charAt(1)+""+no_zeros+id;
+			}else if(t instanceof WebSeries) {
+				newId = ((WebSeries) t).getWebsName().charAt(0)+""+((WebSeries) t).getWebsName().charAt(1)+""+no_zeros+id;
+			}else {
+				System.out.println("out of dto");
+			}
+			
 			System.out.println(newId);
 			preparedStatement = connection.prepareStatement(updatequery);
 			preparedStatement.setInt(1	, id);

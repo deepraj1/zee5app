@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 //@Table(name = "movie_table")
 public class Movie {
 	@Id
-	@GenericGenerator(name = "useridgenerator", strategy = "com.zee.zee5app.utils.MovieIdGenerator")//generting the value
+	@GenericGenerator(name = "useridgenerator", strategy = "com.zee.zee5app.utils.UserIdGenerator")//generting the value
 	@GeneratedValue(generator = "useridgenerator")//consuming the generated value
 	private String movieId;
     private String actors;
