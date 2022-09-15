@@ -18,7 +18,7 @@ public interface MovieService {
     public Optional<List<Movie>> getAllMovies();
 //    public Optional<List<Movie>> getAllMoviesByGenre(Genre genre);
     public Optional<List<Movie>> getAllMoviesByName(String movieName);
-    public Optional<Movie> deleteMovieByMovieId(String movieId) throws NoDataFoundException;
+    public String deleteMovieByMovieId(String movieId) throws NoDataFoundException;
 	public Optional<List<Movie>> getAllMoviesByGenre(String string);
 	public Optional<List<Movie>> findByOrderByMovieNameDsc() throws InvalidNameException;
 

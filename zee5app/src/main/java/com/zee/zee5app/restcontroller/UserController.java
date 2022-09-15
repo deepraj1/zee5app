@@ -58,17 +58,12 @@ public class UserController {
 	
 	@PostMapping("/signin")
 	  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-		System.out.println("---------kul6----------");
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
 						, loginRequest.getPassword()));
-		
-		System.out.println("kul7---------> "+authentication);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateToken(authentication);
-		System.out.println("kul8---------> "+jwt);
 		UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
-		System.out.println("kul9----------> "+userDetailsImpl);
 		List<String> roles = userDetailsImpl.getAuthorities()
 				.stream()
 				.map(i->i.getAuthority())
@@ -83,56 +78,52 @@ public class UserController {
 //				roles));
 		return ResponseEntity.status(HttpStatus.OK).body("han ho gaya");
 	}
-	
-	
-	
-	
 	@PostMapping("/signup") // post method+requestmapping - 4.3
 	public ResponseEntity<?> createUser(@Valid @RequestBody SignupRequest signupRequest) throws UNableToGenerateIdException, UsernameExistsExecption, InvalidEmainException {
 		
 		
-		User user  = new User("kk0",signupRequest.getFirstName(),signupRequest.getLastName()
-				,signupRequest.getEmail(),LocalDate.now(),signupRequest.getDob()
+		User user  = new User(signupRequest.getFirstName(),signupRequest.getLastName()
+				,signupRequest.getEmail(),LocalDate.now(),null
 				,true,signupRequest.getUsername(), 
 				   encoder.encode(signupRequest.getPassword()));
 		
 		
 		
-		Set<String> strRoles = signupRequest.getRole();
-		Set<Role> roles = new HashSet<>();
-
-		if (strRoles == null) {
-			System.out.println("inside the if condition");
-			Role userRole = roleRepository.findByRoleName(EROLE.ROLE_USER)
-					.orElseThrow(() -> new RuntimeException("Error:role not found"));
-			roles.add(userRole);
-		}
-
-		else {
-			strRoles.forEach(e -> {
-				switch (e) {
-				case "admin":
-					Role roleAdmin = roleRepository.findByRoleName(EROLE.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error:role not found"));
-					roles.add(roleAdmin);
-					break;
-
-				case "mod":
-					Role roleMod = roleRepository.findByRoleName(EROLE.ROLE_MODERATOR)
-							.orElseThrow(() -> new RuntimeException("Error:role not found"));
-					roles.add(roleMod);
-					break;
-
-				default:
-					Role userRole = roleRepository.findByRoleName(EROLE.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error:role not found"));
-					roles.add(userRole);
-				}
-			});
-
-		}
-//		System.out.println(roles);
-		user.setRoles(roles);
+//		Set<String> strRoles = signupRequest.getRole();
+//		Set<Role> roles = new HashSet<>();
+//
+//		if (strRoles == null) {
+//			System.out.println("inside the if condition");
+//			Role userRole = roleRepository.findByRoleName(EROLE.ROLE_USER)
+//					.orElseThrow(() -> new RuntimeException("Error:role not found"));
+//			roles.add(userRole);
+//		}
+//
+//		else {
+//			strRoles.forEach(e -> {
+//				switch (e) {
+//				case "admin":
+//					Role roleAdmin = roleRepository.findByRoleName(EROLE.ROLE_ADMIN)
+//							.orElseThrow(() -> new RuntimeException("Error:role not found"));
+//					roles.add(roleAdmin);
+//					break;
+//
+//				case "mod":
+//					Role roleMod = roleRepository.findByRoleName(EROLE.ROLE_MODERATOR)
+//							.orElseThrow(() -> new RuntimeException("Error:role not found"));
+//					roles.add(roleMod);
+//					break;
+//
+//				default:
+//					Role userRole = roleRepository.findByRoleName(EROLE.ROLE_USER)
+//							.orElseThrow(() -> new RuntimeException("Error:role not found"));
+//					roles.add(userRole);
+//				}
+//			});
+//
+//		}
+////		System.out.println(roles);
+//		user.setRoles(roles);
 		service.insertUser(user);
 		
 		HashMap<String	, String> resData = new HashMap<>();
@@ -170,9 +161,11 @@ public class UserController {
 //		return ResponseEntity.status(HttpStatus.CREATED).body(user2);
 	}
 	
-	@PutMapping()
-	public String updateUser(User user) {
-		return "updated";
+	@PutMapping("/update")
+	public String updateUser(@Valid @RequestBody User user) {
+		user.setPassword(encoder.encode(user.getPassword()));
+		service.updateUser(user).get();
+		return "user updated succesfully ";
 	}
 	@GetMapping("/{id}")
 	public User getUser(@PathVariable("id") String id) {
@@ -234,3 +227,28 @@ public class UserController {
 //	   "password":"XSAXSANXKJASXASlNX",
 //	    "role":["admin","mod"]
 //	}
+
+
+//what is role in user dto why roles is not in the user table
+//how to handle duplicates in movie and webs
+
+
+//{
+//	   "firstName":"Kuldeep",
+//	   "lastName":"Raj",
+//	   "email":"kuldeep@gmail",
+//	   "username":"kuldeepraj",
+//	   "password":"password1"
+//	}
+//{
+//    "userId": "KR0000000002",
+//    "firstName": "Kuldeep",
+//    "lastName": "Rohlan",
+//    "email": "kuldeep@gmail",
+//    "doj": "14-09-2022",
+//    "dob": "10-10-2010-03-22-22",
+//    "active": true,
+//    "userName": "kuldeepraj",
+//    "password": "password",
+//    "roles": []
+//}

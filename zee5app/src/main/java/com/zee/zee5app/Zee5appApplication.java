@@ -14,7 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.zee.zee5app.dto.Employee;
+//import com.zee.zee5app.dto.Employee;
 import com.zee.zee5app.dto.Movie;
 import com.zee.zee5app.dto.User;
 import com.zee.zee5app.dto.WebSeries;
@@ -23,7 +23,7 @@ import com.zee.zee5app.exceptions.InvalidEmainException;
 import com.zee.zee5app.exceptions.NoDataFoundException;
 import com.zee.zee5app.exceptions.UNableToGenerateIdException;
 import com.zee.zee5app.exceptions.UsernameExistsExecption;
-import com.zee.zee5app.repo.EmployeeRepository;
+//import com.zee.zee5app.repo.EmployeeRepository;
 import com.zee.zee5app.service.MovieService;
 import com.zee.zee5app.service.MovieServiceImpl;
 import com.zee.zee5app.service.UserService;

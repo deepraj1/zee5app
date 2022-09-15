@@ -75,10 +75,26 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Optional<Movie> deleteMovieByMovieId(String movieId) throws NoDataFoundException {
+	public String deleteMovieByMovieId(String movieId) throws NoDataFoundException {
 		// TODO Auto-generated method stub
 //		return null;
-		return movieRepo.findById(movieId);
+		try {
+			boolean result = movieRepo.existsById(movieId);
+			if(result) {
+				movieRepo.deleteById(movieId);
+				return "success";
+			}else {
+				throw new NoDataFoundException("no data find");
+			}
+		}catch(NoDataFoundException e){
+			e.printStackTrace();
+			throw e;
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "fail";
 	}
 
 

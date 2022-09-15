@@ -3,11 +3,13 @@ package com.zee.zee5app.dto;
 import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 //import javax.management.relation.InvalidRelationIdException;
 import javax.naming.InvalidNameException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,9 +50,11 @@ public class Movie {
     private String movieName;
     private String director;
     @NotNull
-    private String genre;
+//    @Enumerated(EnumType.STRING)
+    private String[] genre;
     private String production;
-    private String languages;
+//    @Enumerated(EnumType.STRING)
+    private String[] languages;
     @NotNull
     @Column(columnDefinition = "TIME")
     @JsonFormat(shape = JsonFormat.Shape.STRING , pattern = "HH:mm")

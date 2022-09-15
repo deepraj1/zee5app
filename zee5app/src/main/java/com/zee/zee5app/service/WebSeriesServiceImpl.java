@@ -17,6 +17,7 @@ public class WebSeriesServiceImpl implements WebSeriesService {
 	@Override
 	public WebSeries insertWebs(WebSeries series) {
 		// TODO Auto-generated method stub
+		
 		return repo.save(series);
 	}
 

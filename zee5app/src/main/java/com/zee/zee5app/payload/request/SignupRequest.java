@@ -27,12 +27,12 @@ public class SignupRequest {
   @Email
   private String email;
 
-  private Set<String> role;
+//  private Set<String> role;
 
   @NotBlank
   @Size(min = 6, max = 40)
   private String password;
 //  @Column(columnDefinition = "TIMESTAMP")
-  @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy-HH-mm-ss")
-  private LocalDateTime dob;
+//  @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy-HH-mm-ss")
+//  private LocalDateTime dob;
 }

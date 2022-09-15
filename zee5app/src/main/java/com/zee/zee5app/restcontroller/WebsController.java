@@ -2,6 +2,8 @@ package com.zee.zee5app.restcontroller;
 
 import java.io.FileNotFoundException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,8 @@ public class WebsController {
 	WebSeriesService service;
 	
 	@PostMapping("/create")
-	public ResponseEntity<?> insertMovie(@RequestBody WebSeries webs) throws FileNotFoundException, UNableToGenerateIdException{
+	public ResponseEntity<?> insertWebs(@Valid @RequestBody WebSeries webs) throws FileNotFoundException, UNableToGenerateIdException{
+		System.out.println(webs.toString());
 		WebSeries series = service.insertWebs(webs);
 		return ResponseEntity.status(HttpStatus.CREATED).body(series);
 	}

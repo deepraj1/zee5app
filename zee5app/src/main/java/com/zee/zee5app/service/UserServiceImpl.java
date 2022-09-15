@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> updateUser(String userId, User user) {
+	public Optional<User> updateUser( User user) {
 		// TODO Auto-generated method stub
 //		return null;
 //		return repo.get;
-		return Optional.empty();
+		return Optional.ofNullable(repo.save(user));
 	}
 
 	@Override

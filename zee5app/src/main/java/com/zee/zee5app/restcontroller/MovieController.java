@@ -39,7 +39,7 @@ public class MovieController {
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteMoviebyMovieId(@PathVariable("id") String movieId) throws NoDataFoundException{
-		Movie movie = service.deleteMovieByMovieId(movieId).get();
+		String movie = service.deleteMovieByMovieId(movieId);
 		return ResponseEntity.status(HttpStatus.OK).body(movie);
 	}
 

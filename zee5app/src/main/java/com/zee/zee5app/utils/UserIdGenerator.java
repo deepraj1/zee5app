@@ -51,7 +51,7 @@ public class UserIdGenerator<T> implements IdentifierGenerator {
 			if (t instanceof User) {
 				newId = ((User) t).getFirstName().charAt(0)+""+((User) t).getLastName().charAt(0)+""+no_zeros+id;
 			}else if(t instanceof Movie) {
-				newId = "M-> "+((Movie) t).getMovieName().charAt(0)+""+((Movie) t).getMovieName().charAt(1)+""+no_zeros+id;
+				newId = ((Movie) t).getMovieName().charAt(0)+""+((Movie) t).getMovieName().charAt(1)+""+no_zeros+id;
 			}else if(t instanceof WebSeries) {
 				newId = ((WebSeries) t).getWebsName().charAt(0)+""+((WebSeries) t).getWebsName().charAt(1)+""+no_zeros+id;
 			}else {

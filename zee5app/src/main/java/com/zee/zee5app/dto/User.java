@@ -26,6 +26,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat;
 
 import lombok.AllArgsConstructor;
@@ -45,10 +46,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class User { // implements Comparable<User> {
 	
-	public User(String string, String firstName2, String lastName2, String email2, LocalDate doj,
+	public User( String firstName2, String lastName2, String email2, LocalDate doj,
 			LocalDateTime dob2, boolean b, String username2, String password2) {
 		// TODO Auto-generated constructor stub
-		this.userId=string;
+//		this.userId=string;
 		this.firstName=firstName2;
 		this.lastName=lastName2;
 		this.email=email2;
@@ -84,6 +85,7 @@ public class User { // implements Comparable<User> {
 	@NotNull
 	private String userName;
 	@NotNull
+	@JsonIgnore
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.LAZY)

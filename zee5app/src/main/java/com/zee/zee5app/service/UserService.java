@@ -13,7 +13,7 @@ import com.zee.zee5app.exceptions.UsernameExistsExecption;
 @Service
 public interface UserService {
 	public User insertUser(User user) throws UNableToGenerateIdException, UsernameExistsExecption, InvalidEmainException;
-	public Optional<User> updateUser(String userId, User user);
+	public Optional<User> updateUser( User user);
 //	public String deleteUser(int userId) throws NoDataFoundException;
 	public Optional<List<User>> getAllUsers();
 //	public Optional<User> getUserById(int userId);

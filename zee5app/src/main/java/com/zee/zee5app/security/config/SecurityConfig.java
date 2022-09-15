@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AuthTokenFilter	authenticationJwtTokenFilter() {
-		System.out.println("---------kul3----------");
+//		System.out.println("---------kul3----------");
 		return new AuthTokenFilter();
 	}
 	
@@ -57,16 +57,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("---------kul1----------");
+//		System.out.println("---------kul1----------");
 		// TODO Auto-generated method stub
 		http.cors().and().csrf().disable()
 	      .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 	      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 	      .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+	      .antMatchers("/api/movie/**").permitAll()
+	      .antMatchers("/api/webs/**").permitAll()
 	      .antMatchers("/api/test/**").permitAll()
 	      .anyRequest().authenticated();
 //		System.out.println("kuldeep-----------");
-		System.out.println("---------kul2----------");
+//		System.out.println("---------kul2----------");
 	    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 	
