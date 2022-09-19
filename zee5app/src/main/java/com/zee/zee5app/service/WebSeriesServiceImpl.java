@@ -22,7 +22,7 @@ public class WebSeriesServiceImpl implements WebSeriesService {
 	}
 
 	@Override
-	public String updateWebs(String WebsId, WebSeries series) {
+	public String updateWebs(WebSeries series) {
 		// TODO Auto-generated method stub
 //		return repo.updateWebs(WebsId, series);
 		return null;

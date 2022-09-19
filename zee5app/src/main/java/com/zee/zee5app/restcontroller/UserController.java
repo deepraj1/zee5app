@@ -35,6 +35,7 @@ import com.zee.zee5app.exceptions.UNableToGenerateIdException;
 import com.zee.zee5app.exceptions.UsernameExistsExecption;
 import com.zee.zee5app.payload.request.LoginRequest;
 import com.zee.zee5app.payload.request.SignupRequest;
+import com.zee.zee5app.payload.response.JwtResponse;
 //import com.zee.zee5app.payload.response.JwtResponse;
 import com.zee.zee5app.repo.RoleRepository;
 import com.zee.zee5app.security.jwt.JwtUtils;
@@ -71,12 +72,12 @@ public class UserController {
 		
 		
 	
-//		return ResponseEntity.ok(new JwtResponse(jwt,
-//				userDetailsImpl.getId(),
-//				userDetailsImpl.getUsername(),
-//				userDetailsImpl.getEmail(),
-//				roles));
-		return ResponseEntity.status(HttpStatus.OK).body("han ho gaya");
+		return ResponseEntity.ok(new JwtResponse(jwt,
+				userDetailsImpl.getId(),
+				userDetailsImpl.getUsername(),
+				userDetailsImpl.getEmail(),
+				roles));
+//		return ResponseEntity.status(HttpStatus.OK).body("han ho gaya");
 	}
 	@PostMapping("/signup") // post method+requestmapping - 4.3
 	public ResponseEntity<?> createUser(@Valid @RequestBody SignupRequest signupRequest) throws UNableToGenerateIdException, UsernameExistsExecption, InvalidEmainException {

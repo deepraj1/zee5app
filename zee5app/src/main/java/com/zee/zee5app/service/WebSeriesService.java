@@ -10,7 +10,7 @@ import com.zee.zee5app.exceptions.NoDataFoundException;
 @Service
 public interface WebSeriesService {
 	public WebSeries insertWebs(WebSeries series);
-	public String updateWebs(String WebsId,WebSeries series );
+	public String updateWebs(WebSeries series );
 	public Optional<WebSeries> getWebsByWebsId(String WebsId);
 	public Optional<List<WebSeries>> getAllWebs();
 	public String deleteWebsByWebsId(String WebsId) throws NoDataFoundException;
